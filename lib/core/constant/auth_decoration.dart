@@ -1,30 +1,27 @@
 import 'package:flutter/material.dart';
 
 const authInputDecoration = InputDecoration(
-  fillColor: Colors.purpleAccent,
+  fillColor: Color(0xfffEFF3FF),
   filled: true,
-  helperText: "Email",
   hintText: "Email Adress",
-  prefixIcon: Icon(Icons.email, color: Colors.black),
-  suffixIcon: Icon(Icons.check_circle, color: Colors.green),
   border: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.green),
+    borderSide: BorderSide(color: Color(0xfffEFF3FF)),
     borderRadius: BorderRadius.all(Radius.circular(24)),
   ),
   enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.green, width: 7),
+    borderSide: BorderSide(color: Color(0xfffEFF3FF), width: 6),
     borderRadius: BorderRadius.all(Radius.circular(24)),
   ),
   focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.green, width: 7),
+    borderSide: BorderSide(color: Color(0xfffEFF3FF), width: 6),
     borderRadius: BorderRadius.all(Radius.circular(24)),
   ),
   errorBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.red, width: 7),
+    borderSide: BorderSide(color: Colors.red, width: 6),
     borderRadius: BorderRadius.all(Radius.circular(24)),
   ),
   disabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.green, width: 7),
+    borderSide: BorderSide(color: Color(0xfffEFF3FF), width: 6),
     borderRadius: BorderRadius.all(Radius.circular(24)),
   ),
 );

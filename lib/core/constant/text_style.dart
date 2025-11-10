@@ -7,6 +7,12 @@ TextStyle style14B = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+TextStyle style16B = TextStyle(
+  color: blackColor,
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+);
+
 TextStyle style20M = TextStyle(
   color: whiteColor,
   fontSize: 14,
