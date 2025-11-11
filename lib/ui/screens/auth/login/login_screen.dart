@@ -9,8 +9,21 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen>
+    with TickerProviderStateMixin {
   bool isLogin = true;
+  TabController? _tabController;
+
+  initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController?.dispose();
+    super.dispose();
+  }
 
   onChange() {
     setState(() {
@@ -50,66 +63,37 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundColor: pinkColor,
                     child: Image.asset("$iconsAssets/logoo.png", scale: 3),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 16),
-                      GestureDetector(
-                        onTap: onChange,
-                        child: Column(
-                          children: [
-                            Text(
-                              "Login",
-                              style: style16B.copyWith(
-                                color: isLogin == true ? pinkColor : blackColor,
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: isLogin == true
-                                    ? pinkColor
-                                    : Colors.transparent,
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              height: 3,
-                              width: 60,
-                            ),
-                          ],
-                        ),
-                      ),
 
-                      SizedBox(width: 16),
-                      GestureDetector(
-                        onTap: onChange,
-                        child: Column(
-                          children: [
-                            Text(
-                              "SingUp",
-                              style: style16B.copyWith(
-                                color: isLogin == false
-                                    ? pinkColor
-                                    : blackColor,
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: isLogin == false
-                                    ? pinkColor
-                                    : Colors.transparent,
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              height: 3,
-                              width: 60,
-                            ),
-                          ],
-                        ),
-                      ),
+                  TabBar(
+                    controller: _tabController,
+                    indicatorColor: pinkColor,
+                    indicatorWeight: 6,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    dividerHeight: 0,
+                    dividerColor: Colors.blue,
+                    unselectedLabelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: blackColor,
+                    ),
+                    labelColor: pinkColor,
+
+                    unselectedLabelColor: blackColor,
+                    tabs: [
+                      Tab(child: Text("Login")),
+                      Tab(child: Text("SingUp")),
                     ],
                   ),
                   SizedBox(height: 16),
-                  isLogin
-                      ? Column(
+
+                  SizedBox(
+                    height: 400,
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: [
+                        ///
+                        /// Login
+                        ///
+                        Column(
                           children: [
                             TextFormField(
                               decoration: authInputDecoration.copyWith(
@@ -137,8 +121,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ],
-                        )
-                      : Column(
+                        ),
+
+                        ///
+                        /// Singup
+                        ///
+                        Column(
                           children: [
                             TextFormField(
                               decoration: authInputDecoration.copyWith(
@@ -173,6 +161,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
+                      ],
+                    ),
+                  ),
                   SizedBox(height: 16),
                 ],
               ),
@@ -180,38 +171,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
-      // body: Column(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   crossAxisAlignment: CrossAxisAlignment.center,
-      //   children: [
-      //     Padding(
-      //       padding: const EdgeInsets.all(8.0),
-      //       child: TextFormField(decoration: authInputDecoration),
-      //     ),
-      //     Padding(
-      //       padding: const EdgeInsets.all(8.0),
-      //       child: TextFormField(
-      //         decoration: authInputDecoration.copyWith(
-      //           hintText: "Password",
-      //           prefixIcon: Icon(Icons.password, color: blackColor),
-      //           suffixIcon: Icon(Icons.remove_red_eye, color: blackColor),
-      //         ),
-      //       ),
-      //     ),
-      //     Padding(
-      //       padding: const EdgeInsets.all(8.0),
-      //       child: TextFormField(
-      //         decoration: InputDecoration(
-      //           helperText: "password",
-      //           hintText: "password Adress",
-      //           prefixIcon: Icon(Icons.password, color: Colors.black),
-      //           suffixIcon: Icon(Icons.check_circle, color: Colors.green),
-      //           border: OutlineInputBorder(),
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
     );
   }
 }
