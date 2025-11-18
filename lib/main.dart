@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learning/core/constant/app_assets.dart';
-import 'package:learning/core/constant/colors.dart';
-import 'package:learning/core/constant/strings.dart';
-import 'package:learning/core/constant/text_style.dart';
+
 import 'package:learning/ui/splash_screen.dart';
 
 void main() {

@@ -3,6 +3,7 @@ import 'package:learning/core/constant/auth_decoration.dart';
 import 'package:learning/core/constant/colors.dart';
 import 'package:learning/core/constant/strings.dart';
 import 'package:learning/core/constant/text_style.dart';
+import 'package:learning/ui/screens/root/root_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -13,6 +14,9 @@ class _LoginScreenState extends State<LoginScreen>
     with TickerProviderStateMixin {
   bool isLogin = true;
   TabController? _tabController;
+
+  final _loginFormKey = GlobalKey<FormState>();
+  final _signupFormKey = GlobalKey<FormState>();
 
   initState() {
     super.initState();
@@ -93,73 +97,108 @@ class _LoginScreenState extends State<LoginScreen>
                         ///
                         /// Login
                         ///
-                        Column(
-                          children: [
-                            TextFormField(
-                              decoration: authInputDecoration.copyWith(
-                                hintText: "User Name",
+                        Form(
+                          key: _loginFormKey,
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                decoration: authInputDecoration.copyWith(
+                                  hintText: "User Name",
+                                ),
+
+                                validator: (value) {
+                                  if (value!.isEmpty || value == null) {
+                                    return "Please enter your UserName";
+                                  } else {
+                                    return null;
+                                  }
+                                },
                               ),
-                            ),
-                            SizedBox(height: 16),
-                            TextFormField(
-                              decoration: authInputDecoration.copyWith(
-                                hintText: "Password ",
+                              SizedBox(height: 16),
+                              TextFormField(
+                                decoration: authInputDecoration.copyWith(
+                                  hintText: "Password ",
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty || value == null) {
+                                    return "Please enter your password";
+                                  } else if (value.length <= 7) {
+                                    return "Please enter your password must be 8 characters";
+                                  } else {
+                                    return null;
+                                  }
+                                },
                               ),
-                            ),
-                            SizedBox(height: 16),
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              alignment: Alignment.center,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: pinkColor,
-                                borderRadius: BorderRadius.circular(8),
+                              SizedBox(height: 16),
+                              InkWell(
+                                onTap: () {
+                                  if (_loginFormKey.currentState!.validate()) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => RootScreen(),
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  alignment: Alignment.center,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: pinkColor,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Text(
+                                    "Login",
+                                    style: style16B.copyWith(color: whiteColor),
+                                  ),
+                                ),
                               ),
-                              child: Text(
-                                "Login",
-                                style: style16B.copyWith(color: whiteColor),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
 
                         ///
                         /// Singup
                         ///
-                        Column(
-                          children: [
-                            TextFormField(
-                              decoration: authInputDecoration.copyWith(
-                                hintText: "User Name",
+                        Form(
+                          key: _signupFormKey,
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                decoration: authInputDecoration.copyWith(
+                                  hintText: "User Name",
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 16),
-                            TextFormField(
-                              decoration: authInputDecoration.copyWith(
-                                hintText: "Email ",
+                              SizedBox(height: 16),
+                              TextFormField(
+                                decoration: authInputDecoration.copyWith(
+                                  hintText: "Email ",
+                                ),
                               ),
-                            ),
 
-                            TextFormField(
-                              decoration: authInputDecoration.copyWith(
-                                hintText: "Password ",
+                              TextFormField(
+                                decoration: authInputDecoration.copyWith(
+                                  hintText: "Password ",
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 16),
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              alignment: Alignment.center,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: pinkColor,
-                                borderRadius: BorderRadius.circular(8),
+                              SizedBox(height: 16),
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                alignment: Alignment.center,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: pinkColor,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  "Singup",
+                                  style: style16B.copyWith(color: whiteColor),
+                                ),
                               ),
-                              child: Text(
-                                "Singup",
-                                style: style16B.copyWith(color: whiteColor),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
