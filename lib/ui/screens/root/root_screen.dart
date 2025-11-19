@@ -50,81 +50,141 @@ class _RootScreenState extends State<RootScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            GestureDetector(
+            _bottomNav(
               onTap: () {
                 onClick(0);
               },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "$iconsAssets/home.png",
-                    height: 16,
-                    width: 16,
-                    color: selectedIndex == 0 ? blackColor : whiteColor,
-                  ),
-                  Text(
-                    "Home",
-                    style: style16B.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: selectedIndex == 0 ? blackColor : whiteColor,
-                    ),
-                  ),
-                ],
-              ),
+              img: "$iconsAssets/home.png",
+              text: "Home",
+              index: 0,
+              selectedIndex: selectedIndex,
             ),
-            GestureDetector(
+            _bottomNav(
               onTap: () {
                 onClick(1);
               },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "$iconsAssets/workout.png",
-                    height: 16,
-                    width: 16,
-                    color: selectedIndex == 1 ? blackColor : whiteColor,
-                  ),
-                  Text(
-                    "Workout",
-                    style: style16B.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: selectedIndex == 1 ? blackColor : whiteColor,
-                    ),
-                  ),
-                ],
-              ),
+              img: "$iconsAssets/workout.png",
+              text: "Workout",
+              index: 1,
+              selectedIndex: selectedIndex,
             ),
-            GestureDetector(
+            _bottomNav(
               onTap: () {
                 onClick(2);
               },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "$iconsAssets/profile.png",
-                    height: 16,
-                    width: 16,
-                    color: selectedIndex == 2 ? blackColor : whiteColor,
-                  ),
-                  Text(
-                    "Profile",
-                    style: style16B.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: selectedIndex == 2 ? blackColor : whiteColor,
-                    ),
-                  ),
-                ],
-              ),
+              img: "$iconsAssets/profile.png",
+              text: "profile",
+              index: 2,
+              selectedIndex: selectedIndex,
             ),
+            // GestureDetector(
+            //   onTap: () {
+            //     onClick(0);
+            //   },
+            //   child: Column(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     children: [
+
+            //       Image.asset(
+            //         "$iconsAssets/home.png",
+            //         height: 16,
+            //         width: 16,
+            //         color: selectedIndex == 0 ? blackColor : whiteColor,
+            //       ),
+            //       Text(
+            //         "Home",
+            //         style: style16B.copyWith(
+            //           fontWeight: FontWeight.w400,
+            //           color: selectedIndex == 0 ? blackColor : whiteColor,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // GestureDetector(
+            //   onTap: () {
+            //     onClick(1);
+            //   },
+            //   child: Column(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     children: [
+            //       Image.asset(
+            //         "$iconsAssets/workout.png",
+            //         height: 16,
+            //         width: 16,
+            //         color: selectedIndex == 1 ? blackColor : whiteColor,
+            //       ),
+            //       Text(
+            //         "Workout",
+            //         style: style16B.copyWith(
+            //           fontWeight: FontWeight.w400,
+            //           color: selectedIndex == 1 ? blackColor : whiteColor,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // GestureDetector(
+            //   onTap: () {
+            //     onClick(2);
+            //   },
+            //   child: Column(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     children: [
+            //       Image.asset(
+            //         "$iconsAssets/profile.png",
+            //         height: 16,
+            //         width: 16,
+            //         color: selectedIndex == 2 ? blackColor : whiteColor,
+            //       ),
+            //       Text(
+            //         "Profile",
+            //         style: style16B.copyWith(
+            //           fontWeight: FontWeight.w400,
+            //           color: selectedIndex == 2 ? blackColor : whiteColor,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),
     );
   }
+}
+
+_bottomNav({
+  required VoidCallback onTap,
+  required String img,
+  required String text,
+  required int index,
+  required int selectedIndex,
+}) {
+  bool isSelected = index == selectedIndex;
+  return GestureDetector(
+    onTap: onTap,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Image.asset(
+          img,
+          height: 16,
+          width: 16,
+          color: isSelected ? whiteColor : greyColor,
+        ),
+        Text(
+          text,
+          style: style16B.copyWith(
+            fontWeight: FontWeight.w400,
+            color: isSelected ? whiteColor : greyColor,
+          ),
+        ),
+      ],
+    ),
+  );
 }
