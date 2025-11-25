@@ -1,3 +1,3 @@
-import 'package:flutter/material.dart';
+import 'package:learning/core/view_model/base_view_model.dart';
 
-class LoginViewModel extends ChangeNotifier {}
+class LoginViewModel extends BaseViewModel {}

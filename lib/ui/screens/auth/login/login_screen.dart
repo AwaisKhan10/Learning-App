@@ -3,6 +3,7 @@ import 'package:learning/core/constant/auth_decoration.dart';
 import 'package:learning/core/constant/colors.dart';
 import 'package:learning/core/constant/strings.dart';
 import 'package:learning/core/constant/text_style.dart';
+import 'package:learning/core/enums/view_state.dart';
 import 'package:learning/ui/screens/auth/login/login_view_model.dart';
 import 'package:learning/ui/screens/root/root_screen.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen>
     return ChangeNotifierProvider(
       create: (BuildContext context) => LoginViewModel(),
       child: Consumer<LoginViewModel>(
-        builder: (context, value, child) => Scaffold(
+        builder: (context, provider, child) => Scaffold(
           body: Container(
             alignment: Alignment.center,
             width: double.infinity,
@@ -136,9 +137,17 @@ class _LoginScreenState extends State<LoginScreen>
                                   ),
                                   SizedBox(height: 16),
                                   InkWell(
-                                    onTap: () {
+                                    onTap: () async {
                                       if (_loginFormKey.currentState!
                                           .validate()) {
+                                        // provider.setLoading(true);
+                                        provider.setState(ViewState.busy);
+                                        await Future.delayed(
+                                          Duration(seconds: 8),
+                                        );
+
+                                        // provider.setLoading(false);
+                                        provider.setState(ViewState.idle);
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -155,12 +164,14 @@ class _LoginScreenState extends State<LoginScreen>
                                         color: pinkColor,
                                         borderRadius: BorderRadius.circular(8),
                                       ),
-                                      child: Text(
-                                        "Login",
-                                        style: style16B.copyWith(
-                                          color: whiteColor,
-                                        ),
-                                      ),
+                                      child: provider.state == ViewState.busy
+                                          ? CircularProgressIndicator()
+                                          : Text(
+                                              "Login",
+                                              style: style16B.copyWith(
+                                                color: whiteColor,
+                                              ),
+                                            ),
                                     ),
                                   ),
                                 ],
